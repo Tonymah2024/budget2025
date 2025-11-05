@@ -1,54 +1,68 @@
-🇨🇦 Canada Budget 2025: Economic Impact Simulator
+🇨🇦 Canada Budget 2025: Economic Impact Simulator (Macro Policy Stress-Test)
 
 Overview
 
-This is a single-page web application designed to visualize and interactively model the key fiscal and economic components of the Canadian Federal Budget 2025 ("Canada Strong"). The application focuses specifically on the government's dual strategy: fiscal discipline through spending reviews and generational capital investment to drive long-term productivity and reduce reliance on the U.S. economy.
+This is a dynamic, single-page web application designed to stress-test the key strategic goals and inherent risks of the Canadian Federal Budget 2025 ("Canada Strong"). The model allows users to manipulate seven independent fiscal, monetary, and external risk variables to analyze the Budget's ultimate success in boosting productivity and reducing reliance on the U.S. economy.
 
-Key Features
+Key Features & Modeled Policy Areas
 
-The simulator is divided into three main analytical sections:
+The application is structured to visualize the complex interdependencies between the government's fiscal policy and external economic forces:
 
-Fiscal Discipline:
+Policy Area
 
-Displays the projected $78.3 billion deficit for 2025-26.
+Key Slider/Variable
 
-Highlights the crucial $60.0 billion five-year savings goal from the Comprehensive Expenditure Review.
+Outcome Tracked
 
-Visually tracks the progress toward balancing day-to-day operational spending.
+I. Growth & Productivity
 
-Capital Investment Simulation:
+Investment Multiplier (Execution Risk) & PR Immigration Levels
 
-Displays the committed $280 Billion in public capital investment over five years.
+2030 Real GDP Boost (Target: 3.5%), Unemployment Rate
 
-Shows the target of catalyzing $1.0 Trillion in total public and private investment.
+II. Fiscal & Monetary Credibility
 
-Features the Investment Multiplier Slider (see Usage below).
+Fiscal Discipline Success (Savings Rate), Monetary Policy Stance (Interest Rates), & Cost-Push Inflation
 
-Simulated 2030 Real GDP Effect:
+Debt-to-GDP Ratio, Simulated CPI Inflation
 
-A dynamic gauge that shows the predicted change in GDP growth by 2030.
+III. External Resilience
 
-The forecast is driven by the user's input on the Investment Multiplier, illustrating that the 3.5% GDP boost goal is highly dependent on successful, timely project execution.
+External Trade Tension (U.S. Risk) & Housing Delivery Success
 
-Trade Diversification Strategy:
+Trade Drag on GDP, Trade Diversification Goal progress, 5-Year Housing Target
 
-Outlines the challenge of US Trade Reliance in the face of escalating protectionism.
+Key Metrics Tracked:
 
-Details the three key solutions: The Trade Diversification Corridors Fund ($5B), EDC Export Support ($25B), and investments in Critical Minerals Sovereignty.
+Real GDP Boost: A dynamic gauge showing the net effect of growth drivers (investment, immigration) versus drags (trade tension, high rates).
 
-Usage: How to Run the Simulation
+Simulated CPI Inflation: Reflects the tension between demand-pull (fiscal stimulus) and cost-push (commodity shock) pressures, benchmarked against the 2.0% BoC Target.
 
-The application is entirely contained within the index.html file and requires no server-side setup.
+Debt-to-GDP: Tracks the stability of this fiscal anchor, influenced by both savings success and the cost of servicing debt (interest rates).
 
-Open the File: Simply open the index.html file in any modern web browser.
+Unemployment Rate: Reflects job market stability based on the combination of investment-driven growth, trade risk, and labour supply (immigration).
 
-Adjust the Multiplier: Use the "Simulate Investment Success (Multiplier)" slider in the Capital Investment card.
+Usage: Running the Policy Stress-Test
 
-Low Multiplier (e.g., 0.5x): Represents poor project execution, delays, and failure to attract significant private co-investment. This results in a minimal or negative GDP boost.
+The application is entirely self-contained within the index.html file. Simply open the file in any modern web browser to start the simulation.
 
-Medium Multiplier (e.g., 1.0x): Represents moderate success where public spending equals private catalytic spending.
+Use the seven dedicated sliders to run customized scenarios:
 
-High Multiplier (e.g., 1.5x - 2.0x): Represents high execution success, efficient delivery of nation-building projects, and massive private sector buy-in, leading to the maximum projected 3.5% Real GDP boost by 2030.
+Investment Multiplier: Models the efficiency of the $280B public investment in catalyzing private capital. (High values = better GDP).
+
+Fiscal Discipline Success: Models how much of the $60B in savings is actually realized through the Expenditure Review. (High values = better Debt-to-GDP).
+
+External Trade Tension (Risk): Models the severity of global or U.S. trade friction. (High values = higher GDP Drag, worse outcomes).
+
+Housing Delivery Success: Models the timely execution of housing and infrastructure projects. (High values = more homes built).
+
+Monetary Policy Stance: Models the central bank's interest rate policy (Hawkish rates suppress investment and increase debt cost).
+
+Cost-Push Inflation Pressure: Models external inflationary shocks (e.g., commodity price spikes) independent of domestic demand.
+
+PR Immigration Levels: Models the government's long-term permanent resident intake (High values increase growth potential but can add short-term friction).
+
+By testing various combinations (e.g., maximum Investment Multiplier with high Trade Tension), you can identify the most critical risks to the Budget's overall success.
 
 Technology Stack
 
@@ -56,6 +70,6 @@ HTML5: Structure of the application.
 
 Tailwind CSS: Used for all styling and responsive design.
 
-JavaScript: Used for the simulation logic, updating the GDP gauge, and handling slider interactions.
+JavaScript: Core logic for the four-variable economic simulation, updating all dynamic outputs, gauges, and progress bars.
 
 SVG: Used to create the dynamic GDP gauge visualization.
