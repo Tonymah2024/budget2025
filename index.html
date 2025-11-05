@@ -28,28 +28,42 @@
             <p class="text-xl text-gray-400 mt-2">Economic Impact Showcase & Simulation</p>
         </header>
 
-        <!-- Main Grid for Data Cards -->
+        <!-- Main Grid for Data Cards (Financial & Economic Output) -->
         <div class="grid md:grid-cols-3 gap-6 mb-12">
 
-            <!-- Card 1: Fiscal Anchor -->
+            <!-- Card 1: Fiscal Anchor (UPDATED with Savings Slider) -->
             <div class="card p-6 rounded-xl shadow-lg">
-                <h2 class="text-2xl font-bold mb-4 text-blue-300">Fiscal Discipline</h2>
-                <p class="text-sm text-gray-400 mb-4">Balancing day-to-day spending by FY2028-29</p>
+                <h2 class="text-2xl font-bold mb-4 text-blue-300">Fiscal Discipline & Debt</h2>
+                <p class="text-sm text-gray-400 mb-4">Anchors: Balance spending (2028-29) & Declining Debt-to-GDP.</p>
 
                 <div class="mb-4">
                     <p class="text-lg font-semibold">Projected 2025-26 Deficit:</p>
                     <p id="deficit-value" class="text-3xl font-extrabold text-red-500">$78.3B</p>
                 </div>
 
-                <div class="mb-4">
+                <div class="pt-4 border-t border-gray-700">
                     <p class="text-lg font-semibold">5-Year Savings Goal:</p>
                     <p class="text-3xl font-extrabold text-green-500">$60.0B</p>
+                    <div class="h-2 bg-gray-700 rounded-full mt-2">
+                        <div id="savings-progress" class="progress-bar-inner h-full bg-green-500 rounded-full" style="width: 75%;"></div>
+                    </div>
+                    <p id="realized-savings-display" class="text-xs text-gray-500 mt-1">Realized Savings: $45.0B (75% of target)</p>
                 </div>
 
-                <div class="h-2 bg-gray-700 rounded-full">
-                    <div id="savings-progress" class="progress-bar-inner h-full bg-green-500 rounded-full" style="width: 75%;"></div>
+                <div class="mt-4">
+                    <label for="savings-success-slider" class="block text-sm font-medium text-gray-400">Simulate Savings Success (Fiscal Discipline):</label>
+                    <input type="range" id="savings-success-slider" min="0.0" max="1.5" value="0.75" step="0.05" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg mt-2">
+                    <span id="savings-slider-display" class="block text-center mt-2 text-green-400 font-bold">75%</span>
                 </div>
-                <p class="text-xs text-gray-500 mt-1">Progress towards expenditure review cuts.</p>
+                
+                <div class="pt-4 mt-4 border-t border-gray-700">
+                    <p class="text-lg font-semibold">Simulated 2029-30 Debt-to-GDP:</p>
+                    <p id="debt-gdp-display" class="text-3xl font-extrabold text-blue-400">42.4%</p>
+                    <div class="h-2 bg-gray-700 rounded-full mt-2">
+                        <div id="debt-gdp-tracker" class="progress-bar-inner h-full bg-blue-500 rounded-full" style="width: 100%;"></div>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">Lower is better. Success means the ratio declines.</p>
+                </div>
             </div>
 
             <!-- Card 2: Investment Focus (Productivity) -->
@@ -59,20 +73,21 @@
                 <p class="text-lg font-semibold">5-Year Public Investment:</p>
                 <p class="text-3xl font-extrabold text-yellow-400">$280B</p>
                 
-                <p class="text-lg font-semibold mt-4">Target Total Catalyzed Investment:</p>
-                <p class="text-3xl font-extrabold text-white">$1.0 Trillion</p>
+                <p class="text-lg font-semibold mt-4">Catalyzed Private Investment:</p>
+                <p id="catalyzed-private-investment" class="text-3xl font-extrabold text-white">$0.0B</p>
+                <p class="text-xs text-gray-500 mt-1">Total Investment (Public + Private) will be $ <span id="total-investment">280.0B</span></p>
 
-                <div class="mt-4">
-                    <label for="investment-multiplier" class="block text-sm font-medium text-gray-400">Simulate Investment Success (Multiplier):</label>
-                    <input type="range" id="investment-multiplier" min="0.5" max="2.0" value="1.0" step="0.1" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg mt-2">
-                    <span id="multiplier-display" class="block text-center mt-2 text-yellow-400 font-bold">1.0x</span>
+                <div class="mt-4 pt-4 border-t border-gray-700">
+                    <label for="investment-multiplier" class="block text-sm font-medium text-gray-400">Simulate Execution Risk (Investment Multiplier):</label>
+                    <input type="range" id="investment-multiplier" min="0.5" max="2.0" value="1.0" step="0.05" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg mt-2">
+                    <span id="multiplier-display" class="block text-center mt-2 text-yellow-400 font-bold">1.00x</span>
                 </div>
             </div>
 
             <!-- Card 3: GDP Effect (Simulation Output) -->
             <div class="card p-6 rounded-xl shadow-lg text-center">
                 <h2 class="text-2xl font-bold mb-4 text-blue-300">Simulated 2030 Real GDP Effect</h2>
-                <p class="text-sm text-gray-400 mb-6">Change in GDP vs. Baseline, based on catalyzed investment success.</p>
+                <p class="text-sm text-gray-400 mb-6">Change in GDP vs. Baseline, net of trade shock.</p>
 
                 <div class="mx-auto w-36 h-36 relative">
                     <svg class="w-full h-full" viewBox="0 0 100 100">
@@ -84,64 +99,132 @@
                     </svg>
                 </div>
 
-                <p class="text-xs text-gray-500 mt-4">Target GDP boost by 2030 (3.5% for 1.5x multiplier).</p>
+                <p class="text-xs text-gray-500 mt-4">Achieving the maximum **3.5%** boost requires strong execution & low trade risk.</p>
+                <div class="mt-4 pt-4 border-t border-gray-700">
+                    <p class="text-lg font-semibold text-red-400">Net Impact of Trade Tension:</p>
+                    <p id="trade-drag-display" class="text-xl font-extrabold text-red-400">0.0% Drag</p>
+                </div>
             </div>
         </div>
 
-        <!-- Diversification & Trade Resilience Section -->
-        <div class="card p-8 rounded-xl shadow-lg mb-12">
-            <h2 class="text-3xl font-bold mb-6 text-blue-300 border-b border-gray-700 pb-2">Trade Diversification & US Reliance</h2>
+        <!-- Policy Impact Grid (Affordability and Diversification) -->
+        <div class="grid md:grid-cols-2 gap-6 mb-12">
+            
+            <!-- NEW CARD: Affordability & Labour Market (UPDATED with Housing Slider) -->
+            <div class="card p-8 rounded-xl shadow-lg">
+                <h2 class="text-3xl font-bold mb-6 text-blue-300 border-b border-gray-700 pb-2">Affordability & Labour Market Policy</h2>
+                <h3 class="text-xl font-semibold mb-2">Housing Supply & Demand</h3>
+                <p class="text-gray-400 mb-4">Budget aims to ease housing pressures through supply (Build Canada Homes) and demand management (Immigration cuts).</p>
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <div>
-                    <h3 class="text-xl font-semibold mb-2">The Challenge: US Trade Reliance</h3>
-                    <p class="text-gray-400 mb-4">Canada's overreliance on the US market exposes it to massive risk from escalating protectionism (tariffs, trade barriers).</p>
-                    <ul class="list-disc list-inside space-y-2 text-gray-300">
-                        <li>**Risk Factor:** US tariffs disrupt key sectors (auto, steel, lumber).</li>
-                        <li>**Economic Effect:** Curbs business investment and lowers overall Real GDP forecast.</li>
-                        <li>**Goal:** Shift from reliance to resilience (42% of budget actions).</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-2">The Solution: Diversification Strategy</h3>
-                    <p class="text-gray-400 mb-4">Budget 2025 aims to double non-US exports over the next decade.</p>
-                    <div class="space-y-4">
-                        <div class="border-l-4 border-yellow-500 pl-4">
-                            <p class="font-bold text-lg">Trade Diversification Corridors Fund</p>
-                            <p class="text-sm text-gray-400">$5 Billion investment to improve transport infrastructure to non-US markets (Asia, Europe).</p>
-                        </div>
-                        <div class="border-l-4 border-yellow-500 pl-4">
-                            <p class="font-bold text-lg">EDC Export Support</p>
-                            <p class="text-sm text-gray-400">Export Development Canada (EDC) support to increase business facilitated by $25B by 2030 in new markets.</p>
-                        </div>
-                        <div class="border-l-4 border-yellow-500 pl-4">
-                            <p class="font-bold text-lg">Critical Minerals Sovereignty</p>
-                            <p class="text-sm text-gray-400">Tax credits and $2B Critical Minerals Fund to build secure domestic supply chains, reducing import dependency.</p>
-                        </div>
+                <div class="space-y-4">
+                    <div class="border-l-4 border-purple-500 pl-4">
+                        <p class="font-bold text-lg">5-Year Housing Target (Simulated)</p>
+                        <p id="housing-target-display" class="text-2xl font-extrabold text-purple-400">0 Homes</p>
+                        <p class="text-sm text-gray-400 mt-1">Homes built or financed by new federal initiatives (linked to execution).</p>
+                    </div>
+                    <div class="border-l-4 border-purple-500 pl-4">
+                        <p class="font-bold text-lg">Temporary Resident Reduction (2026 Target)</p>
+                        <p class="text-2xl font-extrabold text-purple-400">385,000</p>
+                        <p class="text-sm text-gray-400 mt-1">Down from 673k in 2025 to ease demand on infrastructure and housing.</p>
                     </div>
                 </div>
+
+                <div class="mt-4 pt-4 border-t border-gray-700">
+                    <label for="housing-delivery-slider" class="block text-sm font-medium text-gray-400">Simulate Housing Delivery Success:</label>
+                    <input type="range" id="housing-delivery-slider" min="0.0" max="1.0" value="0.5" step="0.05" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg mt-2">
+                    <span id="housing-slider-display" class="block text-center mt-2 text-purple-400 font-bold">50% Success</span>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-gray-700">
+                    <p class="font-bold text-lg mb-2 text-yellow-400">Unemployment Rate (Simulated 2029-30)</p>
+                    <p id="unemployment-rate-display" class="text-2xl font-extrabold text-yellow-400">7.0%</p> 
+                    <p class="text-sm text-gray-400 mt-1">Rate expected to rise if execution is poor and trade uncertainty persists.</p>
+                </div>
             </div>
+
+            <!-- Existing Policy Card: Diversification & Trade Resilience (UPDATED with Trade Tension Slider) -->
+            <div class="card p-8 rounded-xl shadow-lg">
+                <h2 class="text-3xl font-bold mb-6 text-blue-300 border-b border-gray-700 pb-2">Trade Diversification & Resilience</h2>
+
+                <h3 class="text-xl font-semibold mb-2">The Solution: Diversification Strategy</h3>
+                <p class="text-gray-400 mb-4">Budget 2025 aims to double non-US exports over the next decade.</p>
+                
+                <div class="mt-4 pt-4 border-t border-gray-700">
+                    <label for="trade-tension-slider" class="block text-sm font-medium text-gray-400">Simulate External Trade Tension (Risk):</label>
+                    <input type="range" id="trade-tension-slider" min="0.0" max="1.0" value="0.5" step="0.05" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg mt-2">
+                    <span id="trade-tension-display" class="block text-center mt-2 text-red-400 font-bold">Medium Tension (50%)</span>
+                </div>
+                
+                <div class="space-y-4 pt-4 mt-4 border-t border-gray-700">
+                    <div class="border-l-4 border-yellow-500 pl-4">
+                        <p class="font-bold text-lg">Trade Diversification Corridors Fund</p>
+                        <p class="text-sm text-gray-400">$5 Billion investment to improve transport infrastructure to non-US markets (Asia, Europe).</p>
+                    </div>
+                    <div class="border-l-4 border-yellow-500 pl-4">
+                        <p class="font-bold text-lg">EDC Export Support</p>
+                        <p class="text-sm text-gray-400">Export Development Canada (EDC) support to increase business facilitated by $25B by 2030 in new markets.</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 pt-4 border-t border-gray-700">
+                    <p class="font-bold text-lg mb-2 text-green-400">Trade Diversification Goal</p>
+                    <p class="text-sm text-gray-400 mb-2">Target: Double Non-US Exports (Success Proxy)</p>
+                    <div class="h-4 bg-gray-700 rounded-full">
+                        <div id="export-progress" class="progress-bar-inner h-full bg-green-500 rounded-full" style="width: 0%;"></div> 
+                    </div>
+                    <p id="export-progress-text" class="text-xs text-gray-500 mt-1 text-right">0% of goal achieved</p>
+                </div>
+            </div>
+
         </div>
 
         <!-- Risk & Credibility Section -->
         <div class="text-center text-gray-500 pt-4">
-            <p class="text-sm">Note: Economic predictions carry high execution risk. Success depends on the timely and efficient delivery of capital projects and the realized effectiveness of the **investment multiplier**.</p>
+            <p class="text-sm">The simulation now allows you to test the effects of three independent variables: **Investment Execution**, **Fiscal Discipline**, and **External Trade Risk**.</p>
         </div>
     </div>
 
     <script>
         // --- Core Budget Constants ---
         const PUBLIC_INVESTMENT_5YR = 280; // $B
-        const PRIVATE_INVESTMENT_CATALYZATION_TARGET = 500; // $B (needed for 3.5% GDP boost)
+        const PRIVATE_INVESTMENT_CATALYZATION_TARGET = 500; // $B (Private investment needed for MAX_GDP_BOOST)
         const SAVINGS_GOAL = 60; // $B
-        const MAX_GDP_BOOST = 3.5; // % GDP boost by 2030 (based on a 1.5x multiplier)
+        const MAX_GDP_BOOST = 3.5; // % GDP boost by 2030 
+        const MAX_TRADE_DRAG_GDP = 1.0; // Max GDP percentage lost due to high trade tension
+
+        // Fiscal/Debt Constants
+        const BASE_DEBT_GDP_2025 = 42.4; // 2025-26 starting debt-to-GDP
+        const MAX_DEBT_GDP_DOWNSIDE = 45.3; // Projected ratio under a downside scenario (poor growth/low savings)
+        
+        // Socio-Economic Constants
+        const HOUSING_TARGET_5YR = 100000; 
+        const BASE_UNEMPLOYMENT_RATE = 7.0; 
+        const UPSIDE_UNEMPLOYMENT_RATE = 6.0; 
 
         // --- DOM Elements ---
         const multiplierSlider = document.getElementById('investment-multiplier');
         const multiplierDisplay = document.getElementById('multiplier-display');
+        const savingsSlider = document.getElementById('savings-success-slider'); // NEW
+        const savingsSliderDisplay = document.getElementById('savings-slider-display'); // NEW
+        const tradeTensionSlider = document.getElementById('trade-tension-slider'); // NEW
+        const tradeTensionDisplay = document.getElementById('trade-tension-display'); // NEW
+        const housingDeliverySlider = document.getElementById('housing-delivery-slider'); // NEW
+        const housingSliderDisplay = document.getElementById('housing-slider-display'); // NEW
+
+        const catalyzedPrivateInvestmentDisplay = document.getElementById('catalyzed-private-investment');
+        const totalInvestmentDisplay = document.getElementById('total-investment');
         const gdpGauge = document.getElementById('gdp-gauge');
         const gdpPercentage = document.getElementById('gdp-percentage');
         const savingsProgress = document.getElementById('savings-progress');
+        const realizedSavingsDisplay = document.getElementById('realized-savings-display');
+        const exportProgress = document.getElementById('export-progress');
+        const exportProgressText = document.getElementById('export-progress-text');
+        const debtGdpDisplay = document.getElementById('debt-gdp-display');
+        const debtGdpTracker = document.getElementById('debt-gdp-tracker');
+        const housingTargetDisplay = document.getElementById('housing-target-display');
+        const unemploymentRateDisplay = document.getElementById('unemployment-rate-display');
+        const tradeDragDisplay = document.getElementById('trade-drag-display');
+
 
         // --- Gauge Constants ---
         const circumference = 2 * Math.PI * 45; // Circumference for r=45
@@ -151,40 +234,93 @@
         
         // --- Update Function ---
         function updateEconomicSimulation() {
-            const multiplier = parseFloat(multiplierSlider.value);
-            multiplierDisplay.textContent = `${multiplier.toFixed(1)}x`;
+            const investmentMultiplier = parseFloat(multiplierSlider.value);
+            const savingsSuccessRate = parseFloat(savingsSlider.value); // NEW
+            const tradeTension = parseFloat(tradeTensionSlider.value); // NEW (0.0 = low risk, 1.0 = high risk)
+            const housingDeliveryRate = parseFloat(housingDeliverySlider.value); // NEW (0.0 = failure, 1.0 = success)
 
-            // 1. Calculate Catalyzed Private Investment
-            // Simple model: Public investment acts as a catalyst for private investment.
-            // If the multiplier is 1.0, private investment = Public * 1.0
-            // The government projects $1T total investment (Public $280B + Private $720B), which implies a 2.57x multiplier.
-            // We'll tie the GDP boost to the success of reaching a $500B private investment threshold (for the 3.5% boost)
-            
-            const catalyzedInvestment = (PUBLIC_INVESTMENT_5YR * multiplier) - PUBLIC_INVESTMENT_5YR;
-            
-            // 2. Calculate GDP Boost
-            // We linearly scale the GDP boost based on how close we get to the $500B private investment threshold.
-            // Max boost (3.5%) is achieved if catalyzed investment reaches the $500B target.
-            
-            let realizedGDPBoost = (catalyzedInvestment / PRIVATE_INVESTMENT_CATALYZATION_TARGET) * MAX_GDP_BOOST;
-            
-            // Cap the boost at the maximum stated target (3.5%)
-            if (realizedGDPBoost > MAX_GDP_BOOST) {
-                realizedGDPBoost = MAX_GDP_BOOST;
-            } else if (realizedGDPBoost < 0) {
-                realizedGDPBoost = 0;
-            }
+            // Update Slider Displays
+            multiplierDisplay.textContent = `${investmentMultiplier.toFixed(2)}x`;
+            savingsSliderDisplay.textContent = `${(savingsSuccessRate * 100).toFixed(0)}%`;
+            tradeTensionDisplay.textContent = tradeTension < 0.33 ? "Low Tension (External Risk)" : (tradeTension < 0.66 ? "Medium Tension (External Risk)" : "High Tension (External Risk)");
+            housingSliderDisplay.textContent = `${(housingDeliveryRate * 100).toFixed(0)}% Success`;
 
-            // 3. Update Visualizations
+            // 1. INVESTMENT & GDP BOOST CALCULATION
+            // Investment success is the base for growth.
+            const privateInvestment = PUBLIC_INVESTMENT_5YR * (investmentMultiplier - 1.0);
+            const realizedPrivateInvestment = Math.max(0, privateInvestment); 
+            const totalInvestment = PUBLIC_INVESTMENT_5YR + realizedPrivateInvestment;
             
-            // Update GDP Gauge
-            const percentageOfMax = realizedGDPBoost / MAX_GDP_BOOST; // 0 to 1
+            let baseGDPBoost = (realizedPrivateInvestment / PRIVATE_INVESTMENT_CATALYZATION_TARGET) * MAX_GDP_BOOST;
+            if (baseGDPBoost > MAX_GDP_BOOST) { baseGDPBoost = MAX_GDP_BOOST; } 
+            else if (baseGDPBoost < 0) { baseGDPBoost = 0; }
+
+            // Apply Trade Tension Drag (High tension subtracts from base GDP boost)
+            const tradeDrag = tradeTension * MAX_TRADE_DRAG_GDP; // Max 1.0% drag
+            let realizedGDPBoost = Math.max(0.0, baseGDPBoost - tradeDrag);
+            
+            // 2. FISCAL & DEBT-TO-GDP CALCULATION
+            // Realized Savings directly affects fiscal stability.
+            const realizedSavings = SAVINGS_GOAL * savingsSuccessRate;
+            
+            // Debt-to-GDP: Depends on two factors: Savings Success and Investment Growth (GDP Boost).
+            const savingsNormalized = (realizedSavings / SAVINGS_GOAL);
+            
+            // The Debt-to-GDP will trend down if savings are high AND GDP boost is high.
+            // Simplified model: Poor Savings/Growth pushes it towards MAX_DOWNSIDE.
+            const totalSuccessFactor = (investmentMultiplier + savingsSuccessRate) / 3.5; // Max 1.0 if Multiplier=2.0 and Savings=1.5
+            
+            const finalDebtGdp = MAX_DEBT_GDP_DOWNSIDE - (totalSuccessFactor * (MAX_DEBT_GDP_DOWNSIDE - BASE_DEBT_GDP_2025));
+            
+            // 3. SOCIO-ECONOMIC CALCULATION
+            // Housing Success: Scales with the new dedicated slider.
+            const realizedHousingTarget = HOUSING_TARGET_5YR * housingDeliveryRate;
+
+            // Unemployment Rate: Drops if investment is successful (multiplier) but rises with trade tension.
+            const investmentInfluence = (BASE_UNEMPLOYMENT_RATE - UPSIDE_UNEMPLOYMENT_RATE) * (investmentMultiplier - 0.5) / 1.5; // max 1.0 drop
+            const tensionInfluence = tradeTension * 0.5; // max 0.5 increase
+            
+            const finalUnemploymentRate = Math.max(UPSIDE_UNEMPLOYMENT_RATE, BASE_UNEMPLOYMENT_RATE - investmentInfluence + tensionInfluence);
+
+            // 4. TRADE DIVERSIFICATION CALCULATION
+            // Trade success is high if investment is strong AND external risk is low.
+            const tradeSuccessBase = (realizedPrivateInvestment / PRIVATE_INVESTMENT_CATALYZATION_TARGET);
+            const tradeRiskPenalty = tradeTension * 0.5; // Max 50% penalty on success
+            const finalTradeSuccess = Math.max(0, tradeSuccessBase - tradeRiskPenalty);
+            const tradeSuccessPercentage = Math.min(100, finalTradeSuccess * 100);
+
+            // 5. Update Visualizations
+            
+            // Investment & GDP
+            catalyzedPrivateInvestmentDisplay.textContent = `$${realizedPrivateInvestment.toFixed(1)}B`;
+            totalInvestmentDisplay.textContent = `${totalInvestment.toFixed(1)}B`;
+            tradeDragDisplay.textContent = `-${tradeDrag.toFixed(1)}% Drag`;
+
+            const percentageOfMax = realizedGDPBoost / MAX_GDP_BOOST;
             const strokeDashoffset = percentageOfMax * circumference;
-            
             gdpGauge.style.strokeDasharray = `${strokeDashoffset}, ${circumference}`;
             gdpPercentage.textContent = `${realizedGDPBoost.toFixed(1)}%`;
-            gdpGauge.setAttribute('stroke', realizedGDPBoost > 1.5 ? '#10B981' : (realizedGDPBoost > 0.5 ? '#FBBF24' : '#EF4444')); // Green, Yellow, Red
-            gdpPercentage.setAttribute('fill', realizedGDPBoost > 1.5 ? '#10B981' : (realizedGDPBoost > 0.5 ? '#FBBF24' : '#EF4444'));
+            gdpGauge.setAttribute('stroke', realizedGDPBoost > 2.5 ? '#10B981' : (realizedGDPBoost > 1.0 ? '#FBBF24' : '#EF4444')); 
+            gdpPercentage.setAttribute('fill', realizedGDPBoost > 2.5 ? '#10B981' : (realizedGDPBoost > 1.0 ? '#FBBF24' : '#EF4444'));
+            
+            // Fiscal & Debt
+            realizedSavingsDisplay.textContent = `Realized Savings: $${realizedSavings.toFixed(1)}B (${(savingsSuccessRate * 100).toFixed(0)}% of target)`;
+            savingsProgress.style.width = `${(savingsSuccessRate * 100)}%`;
+            savingsProgress.style.backgroundColor = savingsSuccessRate >= 1.0 ? '#10B981' : (savingsSuccessRate > 0.5 ? '#FBBF24' : '#EF4444');
+
+            debtGdpDisplay.textContent = `${finalDebtGdp.toFixed(1)}%`;
+            const debtProgress = 100 - ((finalDebtGdp - BASE_DEBT_GDP_2025) / (MAX_DEBT_GDP_DOWNSIDE - BASE_DEBT_GDP_2025)) * 100;
+            debtGdpTracker.style.width = `${Math.min(100, Math.max(0, debtProgress))}%`;
+            debtGdpTracker.style.backgroundColor = finalDebtGdp <= BASE_DEBT_GDP_2025 ? '#3B82F6' : '#FBBF24';
+
+            // Housing and Labour
+            housingTargetDisplay.textContent = `${(realizedHousingTarget / 1000).toFixed(0)}K Homes`;
+            unemploymentRateDisplay.textContent = `${finalUnemploymentRate.toFixed(1)}%`;
+            
+            // Trade Diversification Progress
+            exportProgress.style.width = `${tradeSuccessPercentage.toFixed(0)}%`;
+            exportProgressText.textContent = `${tradeSuccessPercentage.toFixed(0)}% of goal achieved (Proxy for Doubling Non-US Exports)`;
+            exportProgress.style.backgroundColor = tradeSuccessPercentage > 50 ? '#10B981' : '#FBBF24';
 
         }
 
@@ -193,9 +329,9 @@
 
         // Add event listeners
         multiplierSlider.addEventListener('input', updateEconomicSimulation);
-
-        // Initial Savings Progress (Hardcoded at 75% for visualization)
-        savingsProgress.style.width = `${(SAVINGS_GOAL / (SAVINGS_GOAL * 1.33)) * 100}%`; // 60B is 75% of a nominal 80B need
+        savingsSlider.addEventListener('input', updateEconomicSimulation);
+        tradeTensionSlider.addEventListener('input', updateEconomicSimulation);
+        housingDeliverySlider.addEventListener('input', updateEconomicSimulation);
     </script>
 </body>
 </html>
